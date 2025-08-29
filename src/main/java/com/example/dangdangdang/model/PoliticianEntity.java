@@ -1,8 +1,6 @@
 package com.example.dangdangdang.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +13,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 
-public class Politician {
+public class PoliticianEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long politicianId;
     @Column
     String politicianName;
@@ -26,4 +25,11 @@ public class Politician {
     String academiaCareer;
     Long politicalPartId;
 
+    public PoliticianEntity(String politicianName, LocalDate birth, String career, String academiaCareer, Long politicalPartId){
+        this.politicianName = politicianName;
+        this.birth = birth;
+        this.career = career;
+        this.academiaCareer = academiaCareer;
+        this.politicalPartId = politicalPartId;
+    }
 }
