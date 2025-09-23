@@ -16,19 +16,20 @@ public class UserService {
     private final UserRepository userRepository;
 
     //회원추가
-    public UserEntity addUser(String userId, String userPassword){
-        if(userId.equals(userRepository.findByUserId(userId))){
-            throw new IllegalArgumentException("아이디가 중복입니다.");
+    public UserEntity registerUser(String userId, String userPassword){
+        Optional<UserEntity> registerUsers = userRepository.findByUserId(userId);
+        if(registerUsers.isPresent()){
+            throw new IllegalArgumentException("이미 존재하는 아이디 입니다.");
         }
 
         UserEntity user = new UserEntity();
         user.setUserId(userId);
         user.setUserPassword(userPassword);
-
-        return userRepository.save(user);
+        userRepository.save(user);
+        return user;
     }
     //회원삭제
-    public void deleteUser(String id){
+    public void deleteUserById(String id){
         Optional<UserEntity> user = userRepository.findById(id);
         if (user.isEmpty()) {
             throw new IllegalArgumentException("존재하지 않는 회원입니다.");
@@ -37,7 +38,7 @@ public class UserService {
         userRepository.delete(deletedUser);
     }
     //로그인
-    public Boolean login(String userId, String userPassword){
+    public Boolean authenticateUser(String userId, String userPassword){
         Optional<UserEntity> user = userRepository.findByUserId(userId);
         if(user.isEmpty()){
             return false;
@@ -48,7 +49,7 @@ public class UserService {
     }
     //아이디찾기
     public Optional<String> findId(String userName, String userEmail){
-        Optional<UserEntity> user = userRepository.findByUserName(userName);
+        Optional<UserEntity> user = userRepository.findUserByNameAndEail(userName,userEmail);
         if(user.isPresent()){
             //null이 절대아님.
             return Optional.of(user.get().getUserId());

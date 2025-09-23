@@ -13,6 +13,9 @@ public class PoliticianResposeDto {
     String career;
     String academiaCareer;
     Long politicalPartId;
+    String electionPrecinct; //선거구
+    String NameOfTheAffiliatedCommittee; //소속위원회명
+    String politicianEmailAddress; //국회의원이메일주소
 
     public PoliticianResposeDto fromPoliticianEntity(PoliticianEntity politician){
         PoliticianResposeDto politicianResposeDto = new PoliticianResposeDto();
@@ -22,6 +25,9 @@ public class PoliticianResposeDto {
         politicianResposeDto.career = politician.getCareer();
         politicianResposeDto.academiaCareer = politician.getAcademiaCareer();
         politicianResposeDto.politicalPartId = politician.getPoliticalPartId();
+        politicianResposeDto.electionPrecinct = politician.getElectionPrecinct();
+        politicianResposeDto.NameOfTheAffiliatedCommittee = politician.getNameOfTheAffiliatedCommittee();
+        politicianResposeDto.politicianEmailAddress = politician.getPoliticianEmailAddress();
         return  politicianResposeDto;
     }
 }
