@@ -21,7 +21,7 @@ public class PoliticianEntity {
     String politicianName;
     LocalDate birth;
     //byte[] imageBytes = Files.readAllBytes(Paths.get("image.png"));
-    String career;
+    String career;//경력
     String academiaCareer; //학력
     Long politicalPartId; //정당
     String electionPrecinct; //선거구
